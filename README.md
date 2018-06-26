@@ -41,3 +41,7 @@ View in browser:
 example:
 
 `http://0.0.0.0:8001/`
+
+### Viewing files
+
+At the moment searchable by time only
