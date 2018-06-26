@@ -36,7 +36,7 @@ def get_csv_table(filename,headers=None,delimiter=","):
                 continue
             table += "<tr>"
             for cell in row:
-                if int(row[6]) < int(100):
+                if float(row[6]) < float(100):
                     table += "".join(["<td align=center bgcolor=#FF0000>"+cell+"</td>"])
                 else:
                     table += "".join(["<td align=center>"+cell+"</td>"])
