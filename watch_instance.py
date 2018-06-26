@@ -19,7 +19,7 @@ def get_csv_table(filename,headers=None,delimiter=","):
     with open(filename, 'rb') as f:
         mycsv = csv.reader(f)
 
-        table = "<table border=1>"
+        table = "<h1 align=center>TEST RESULTS</h1><br><input type=text id=input onkeyup=searchFunc() placeholder=search...><table border=1 id=myTable>"
 
 #            table+= "".join(["<th align=center>"+cell+"</th>" for cell in headers])
     #    else:
@@ -51,12 +51,26 @@ def main():
     fname = filename.split(".")[0]
     fname_html = '{0}{1}'.format(fname,".html")
 
-    with open(fname_html, 'w') as f:
+    template = 'template.txt'
+    fint = open(template, "r")
+    data1 = fint.read()
+    fint.close()
+    fdout = open(fname_html, "a")
+    fdout.write(data1)
+
+    with open(fname_html, 'a') as f:
         f.write("<h1 align=center>INSTANCE HEALTH</h1><br>")
         for s in html_table:
             f.write(s)
         #    f.write("\n")
     #        print s
+    n1 = 'searchtable.js'
+    fin = open(n1, "r")
+    data2 = fin.read()
+    fin.close()
+    fout = open(fname_html, "a")
+    fout.write(data2)
+
     call_mv = 'mv {0} {1}'.format(fname_html, path_uploads)
     subprocess.call(call_mv, shell=True)
 

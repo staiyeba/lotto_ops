@@ -17,11 +17,12 @@ csv_table = []
 this_dir = os.path.dirname(os.path.abspath(__file__))
 upload_dir = 'templates/'
 path_uploads = os.path.join(this_dir, upload_dir)
+
 def get_csv_table(filename,headers=None,delimiter=","):
 
     with open(filename, 'rb') as f:
         mycsv = csv.reader(f)
-        table = "<table border=1>"
+        table = "<h1 align=center>TEST RESULTS</h1><br><input type=text id=input onkeyup=searchFunc() placeholder=search...><table border=1 id=myTable>"
 
 #            table+= "".join(["<th align=center>"+cell+"</th>" for cell in headers])
     #    else:
@@ -57,16 +58,30 @@ def get_data(filename):
 
 def main():
 
-    html_table = get_csv_table(filename)
-
     fname = filename.split(".")[0]
     fname_html = '{0}{1}'.format(fname,".html")
 
-    with open(fname_html, 'w') as f:
-        f.write("<h1 align=center>TEST RESULTS</h1><br>")
+    template = 'template.txt'
+    fint = open(template, "r")
+    data1 = fint.read()
+    fint.close()
+    fdout = open(fname_html, "a")
+    fdout.write(data1)
+
+    html_table = get_csv_table(filename)
+
+    with open(fname_html, 'a') as f:
         for s in html_table:
             f.write(s)
     #        print s
+
+    n1 = 'searchtable.js'
+    fin = open(n1, "r")
+    data2 = fin.read()
+    fin.close()
+    fout = open(fname_html, "a")
+    fout.write(data2)
+#    fout.close()
     call_mv = 'mv {0} {1}'.format(fname_html, path_uploads)
     subprocess.call(call_mv, shell=True)
 
